@@ -1,3 +1,4 @@
+#-*- coding: latin-1 -*-
 from urllib.request import urlopen
 #import requests
 import json
@@ -13,8 +14,8 @@ def ManageCity(city):
     # r = requests.get(link)
     # data = json.loads(r.text)
     city = city.lower()
-    city = city.replace("Ã¤", "a")
-    city = city.replace("Ã¶", "o")
+    city = city.replace("ä", "a")
+    city = city.replace("ö", "o")
     # result_list = data['response']
     result_list = city_list()
     for result in result_list:
