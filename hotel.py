@@ -15,8 +15,8 @@ def ManageCity(city):
     # r = requests.get(link)
     # data = json.loads(r.text)
     city = city.lower()
-    city = city.replace("ä", "a")
-    city = city.replace("ö", "o")
+    #city = city.replace("ä", "a")
+    #city = city.replace("ö", "o")
     # result_list = data['response']
     result_list = city_list()
     for result in result_list:
