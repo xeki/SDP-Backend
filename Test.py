@@ -5,7 +5,7 @@ import json
 from Vaccination import *
 from Attraction import *
 from hotel import *
-from trade_off import *
+#from trade_off import *
 '''from flight import *
 from package import *
 from combine import *'''
