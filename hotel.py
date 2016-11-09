@@ -1,4 +1,5 @@
 #-*- coding: latin-1 -*-
+
 from urllib.request import urlopen
 #import requests
 import json
