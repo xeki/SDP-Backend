@@ -15,7 +15,9 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    return 'Hello World!'
+    callMe = whatsApp()
+    print("hey bro: " + callMe)
+    return 'Hello World!' +callMe
 
 
 if __name__ == '__main__':

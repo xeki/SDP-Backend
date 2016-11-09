@@ -11,7 +11,6 @@ from city_code import *
 #         if (result['name'] == city):
 #             return result['code']
 
-
 def getFlightData(origin, destination, dateOfDeparture, dateOfreturn):
     api_key = "AIzaSyCFe4aroUT5mXbLx450-AvAQYC5GLPBwYk"
     url = "https://www.googleapis.com/qpxExpress/v1/trips/search?key=" + api_key

@@ -1,6 +1,8 @@
 import requests
 import json
 
+def whatsApp():
+    return "what's up Yo"
 
 def getAttractions(city, attractions):
     url = "https://maps.googleapis.com/maps/api/place/textsearch/json?query="
