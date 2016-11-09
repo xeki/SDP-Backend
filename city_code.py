@@ -1,4 +1,4 @@
-
+#-*- coding: latin-1 -*-
 
 data=[
   {
@@ -489,7 +489,7 @@ data=[
   {
     "Country_code": "TD",
     "Code": "AEH",
-    "Name": "AbÃ©chÃ©"
+    "Name": "Abéché"
   },
   {
     "Country_code": "ES",
@@ -3729,7 +3729,7 @@ data=[
   {
     "Country_code": "MX",
     "Code": "BJX",
-    "Name": "LeÃ³n"
+    "Name": "León"
   },
   {
     "Country_code": "ES",
@@ -4744,7 +4744,7 @@ data=[
   {
     "Country_code": "CM",
     "Code": "BTA",
-    "Name": "YaoundÃ©"
+    "Name": "Yaoundé"
   },
   {
     "Country_code": "CG",
@@ -5669,7 +5669,7 @@ data=[
   {
     "Country_code": "DZ",
     "Code": "CBH",
-    "Name": "BÃ©char"
+    "Name": "Béchar"
   },
   {
     "Country_code": "AU",
@@ -10834,7 +10834,7 @@ data=[
   {
     "Country_code": "FO",
     "Code": "FAE",
-    "Name": "SorvÃ¡gur"
+    "Name": "Sorvágur"
   },
   {
     "Country_code": "US",
@@ -12464,7 +12464,7 @@ data=[
   {
     "Country_code": "DZ",
     "Code": "GHA",
-    "Name": "GhardaÃ¯a"
+    "Name": "Ghardaïa"
   },
   {
     "Country_code": "BS",
@@ -25654,7 +25654,7 @@ data=[
   {
     "Country_code": "CM",
     "Code": "NGE",
-    "Name": "NgaoundÃ©rÃ©"
+    "Name": "Ngaoundéré"
   },
   {
     "Country_code": "FJ",
@@ -26494,7 +26494,7 @@ data=[
   {
     "Country_code": "DE",
     "Code": "NUE",
-    "Name": "NÃ¼rnberg"
+    "Name": "Nürnberg"
   },
   {
     "Country_code": "LK",
@@ -30994,7 +30994,7 @@ data=[
   {
     "Country_code": "DZ",
     "Code": "QSF",
-    "Name": "SÃ©tif"
+    "Name": "Sétif"
   },
   {
     "Country_code": "IT",
@@ -32179,7 +32179,7 @@ data=[
   {
     "Country_code": "DK",
     "Code": "RNN",
-    "Name": "RÃ¸nne"
+    "Name": "Rønne"
   },
   {
     "Country_code": "US",
@@ -33394,7 +33394,7 @@ data=[
   {
     "Country_code": "CV",
     "Code": "SFL",
-    "Name": "SÃ£o Filipe"
+    "Name": "São Filipe"
   },
   {
     "Country_code": "US",
@@ -33914,7 +33914,7 @@ data=[
   {
     "Country_code": "CR",
     "Code": "SJO",
-    "Name": "San JosÃ©"
+    "Name": "San José"
   },
   {
     "Country_code": "BR",
@@ -34219,7 +34219,7 @@ data=[
   {
     "Country_code": "BR",
     "Code": "SLZ",
-    "Name": "SÃ£o Luis"
+    "Name": "São Luis"
   },
   {
     "Country_code": "PT",
@@ -34479,7 +34479,7 @@ data=[
   {
     "Country_code": "HU",
     "Code": "SOB",
-    "Name": "SÃ¡rmellÃ©k"
+    "Name": "Sármellék"
   },
   {
     "Country_code": "ID",
@@ -34764,7 +34764,7 @@ data=[
   {
     "Country_code": "BR",
     "Code": "SQM",
-    "Name": "SÃ£o Miguel de Aragao"
+    "Name": "São Miguel de Aragao"
   },
   {
     "Country_code": "ID",
@@ -40119,7 +40119,7 @@ data=[
   {
     "Country_code": "SE",
     "Code": "VXO",
-    "Name": "VÃ¤xjÃ¶"
+    "Name": "Växjö"
   },
   {
     "Country_code": "ZA",
@@ -44374,7 +44374,7 @@ data=[
   {
     "Country_code": "CA",
     "Code": "YQB",
-    "Name": "QuÃ©bec City"
+    "Name": "Québec City"
   },
   {
     "Country_code": "CA",
