@@ -2,7 +2,13 @@ import flask
 import requests
 from flask import Flask, flash, redirect, render_template, request, session, abort
 import json
-import Vaccination
+from Vaccination import *
+from Attraction import *
+'''from flight import *
+from hotel import *
+from trade_off import *
+from package import *
+from combine import *'''
 
 app = Flask(__name__)
 
