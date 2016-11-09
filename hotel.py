@@ -1,5 +1,5 @@
-from urllib.request import urlopen
-#import requests
+#from urllib.request import urlopen
+import requests
 import json
 from dateutil import parser
 from datetime import datetime
@@ -13,7 +13,7 @@ def ManageCity(city):
     # r = requests.get(link)
     # data = json.loads(r.text)
     city = city.lower()
-    
+
     # result_list = data['response']
     result_list = city_list()
     for result in result_list:
@@ -35,8 +35,9 @@ def getHotelsForDestinationCity(city, check_in, check_out):
         return {"Error": "Invalid city name"}
     # making API call to trip expert to list destinations
     url = hotelUrl + API_KEY
-    data = urlopen(url).read().decode('utf-8')
-    jsonData = json.loads(data)
+    #data = urlopen(url).read().decode('utf-8')
+    data = requests.get(url)
+    jsonData = json.loads(data.text)
     jsonData = jsonData['response']['destinations']
     destIdList = []
     destId = ""
