@@ -15,7 +15,7 @@ app = Flask(__name__)
 @app.route('/')
 def greetThem():
      return "Hi guys"
-'''
+
 @app.route('/sdp',methods=['GET'])
 def package():
      originplace= request.args.get('originplace')
@@ -52,7 +52,7 @@ def package():
      response={'results':results}
 
      return flask.jsonify(response)
-'''
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080)
