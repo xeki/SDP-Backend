@@ -66,8 +66,8 @@ def getHotelsForDestinationCity(city, check_in, check_out):
         url = 'http://api.tripexpert.com/v1/venues?destination_id=' + str(destId) + '&limit=' + str(
             LIMIT) + '&check_in=' + checkInDate + '&check_out=' + checkOutDate + '&api_key=' + API_KEY
         print("Url: {}".format(url))
-        response = urlopen(url).read().decode('utf-8')
-        response = json.loads(response)
+        response = requests.get(url)
+        response = json.loads(response.text)
         totalVenues = response['response']['venues']
         venueList = []
         id = 1
@@ -86,23 +86,24 @@ def getHotelsForDestinationCity(city, check_in, check_out):
     except:
         return {"Error": "Error in searching hotel details"}
 
+'''
+def extractForTradeOff(city, check_in, check_out):
+    myDestVenues = getHotelsForDestinationCity(city, check_in, check_out)
+    trade_h = []
+    for venue in myDestVenues:
+        hotel = {}
+        hotel['hotel' + str(venue["id"])] = {"ranking": venue["ranking"], "room_price": venue["room_price"]}
+        trade_h.append(hotel)
+    print(trade_h)
 
-# def extractForTradeOff(city, check_in, check_out):
-#     myDestVenues = getHotelsForDestinationCity(city, check_in, check_out)
-#     trade_h = []
-#     for venue in myDestVenues:
-#         hotel = {}
-#         hotel['hotel' + str(venue["id"])] = {"ranking": venue["ranking"], "room_price": venue["room_price"]}
-#         trade_h.append(hotel)
-#     print(trade_h)
 
+loop = True
+while loop:
+    city = input("Enter a city: ")
 
-# loop = True
-# while loop:
-#     city = input("Enter a city: ")
-#
-#     myDest = extractForTradeOff(city, "2016-11-11", "2016-11-13")
-#     print(myDest)
-#     loopAgain = input("Loop again: ")
-#     if loopAgain == "n":
-#         loop = False
+    myDest = extractForTradeOff(city, "2016-11-11", "2016-11-13")
+    print(myDest)
+    loopAgain = input("Loop again: ")
+    if loopAgain == "n":
+        loop = False
+'''

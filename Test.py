@@ -12,7 +12,7 @@ from Attraction import *
 
 app = Flask(__name__)
 
-
+#limitless-lowlands-64274.herokuapp.com/sdp?originplace=Helsinki&destinationplace=Paris&outbounddate=2016-11-17&inbounddate=2016-11-21&attractions=shop,bar&tfd=min&tfp=min&tft=min&thr=max&thp=min
 @app.route('/')
 def hello_world():
     callMe = whatsApp()
