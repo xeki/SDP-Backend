@@ -7,21 +7,23 @@ from datetime import datetime
 from city_code import *
 import random
 
-
-def ManageCity(city):
-    # link = "https://iatacodes.org/api/v6/cities?api_key=5276c2c4-0d42-4423-b758-733794c23f1e"
-    # r = requests.get(link)
-    # data = json.loads(r.text)
+def cityEncoder(city):
     city = city.lower()
     city_encoded = city.encode('utf-8')
     finnish_a = b'\xc3\xa4'
     finnish_o = b'\xc3\xb6'
     latin_a = b'a'
     latin_o = b'o'
-    city_encoded = city_encoded.replace(finnish_a,latin_a)
+    city_encoded = city_encoded.replace(finnish_a, latin_a)
     city_encoded = city_encoded.replace(finnish_o, latin_o)
     city = city_encoded.decode('utf-8')
+    return city
+def ManageCity(city):
+    # link = "https://iatacodes.org/api/v6/cities?api_key=5276c2c4-0d42-4423-b758-733794c23f1e"
+    # r = requests.get(link)
+    # data = json.loads(r.text)
     # result_list = data['response']
+    city = cityEncoder(city)
     result_list = city_list()
     for result in result_list:
         if (result['Name'].lower() == city):
