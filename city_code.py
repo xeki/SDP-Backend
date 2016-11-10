@@ -46845,7 +46845,7 @@ data=[
 def city(city_name):
   for i in  range(len(data)):
 
-      if data[i]['Name']==city_name:
+      if data[i]['Name'].lower()==city_name:
 
           return data[i]['Code']
 
