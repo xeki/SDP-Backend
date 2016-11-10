@@ -13,7 +13,14 @@ def ManageCity(city):
     # r = requests.get(link)
     # data = json.loads(r.text)
     city = city.lower()
-
+    city_encoded = city.encode('utf-8')
+    finnish_a = b'\xc3\xa4'
+    finnish_o = b'\xc3\xb6'
+    latin_a = b'a'
+    latin_o = b'o'
+    city_encoded = city_encoded.replace(finnish_a,latin_a)
+    city_encoded = city_encoded.replace(finnish_o, latin_o)
+    city = city_encoded.decode('utf-8')
     # result_list = data['response']
     result_list = city_list()
     for result in result_list:
