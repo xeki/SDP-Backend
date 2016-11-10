@@ -4,15 +4,15 @@ from os.path import join, dirname
 from watson_developer_cloud import TradeoffAnalyticsV1
 def trade_off(options,tfPrice,tfDuration,tfTransfer,thPrice,thRanking):
     if tfPrice is None:
-        thPrice='min'
+        tfPrice='min'
     if tfDuration is None:
-        thPrice='min'
-    if tfDuration is None:
-        thPrice='min'
+        tfDuration='min'
+    if tfTransfer is None:
+        tfTransfer='min'
     if thPrice is None:
         thPrice='min'
     if thRanking is None:
-        thPrice='min'
+        thRanking='max'
     dic = {
         "columns": [
             {
