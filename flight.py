@@ -38,6 +38,7 @@ def getFlightData(origin, destination, dateOfDeparture, dateOfreturn):
         price = {'Currency': option['saleTotal'][:3], 'Price': option['saleTotal'][3:]}
         flight = {}
         flight['price']=price
+        flight['id']=count
         slices = option['slice']
         twoWay=[]
         for slice in slices:
@@ -61,11 +62,12 @@ def getFlightData(origin, destination, dateOfDeparture, dateOfreturn):
             twoWay.append(oneWay_package)
         flight['flight_info']=twoWay
 
-        flight_package['flight'+str(count)]=flight
+        flight_package['flight']=flight
         count=count+1
         flightList.append(flight_package)
 
     return flightList
+
 
 # def getTradeOff(flightList):
 #     trade_f = []

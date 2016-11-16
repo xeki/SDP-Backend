@@ -9,7 +9,7 @@ def combine(flightList,myDestVenues):
     for i in range(len(flightList)):
         package={}
         result={}
-        flight = flightList[i]['flight' + str(i + 1)]
+        flight = flightList[i]['flight']
         price = flight['price']['Price']
 
         durations = flight['flight_info']

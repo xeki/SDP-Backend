@@ -16,7 +16,8 @@ def packages(options,front,data_f,data_h,av):
         hotel=int(a[1][-1:])
         f=data_f[flight-1]
         h=data_h[hotel-1]
-        hotel_package={a[1]:h}
+
+        hotel_package={a[1][:-1]:h}
         package = f.copy()
         package.update(hotel_package)
         all = package.copy()
