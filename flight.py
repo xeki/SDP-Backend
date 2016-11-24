@@ -11,7 +11,7 @@ from city_code import *
 #         if (result['name'] == city):
 #             return result['code']
 
-def getFlightData(origin, destination, dateOfDeparture, dateOfreturn):
+def getFlightData(origin, destination, dateOfDeparture, dateOfreturn,adultCount,childrenCount):
     api_key = "AIzaSyCFe4aroUT5mXbLx450-AvAQYC5GLPBwYk"
     url = "https://www.googleapis.com/qpxExpress/v1/trips/search?key=" + api_key
     headers = {'content-type': 'application/json'}
@@ -19,54 +19,62 @@ def getFlightData(origin, destination, dateOfDeparture, dateOfreturn):
     flight_Return={'origin': city(destination), 'destination': city(origin), 'date': dateOfreturn}
     flightInfo=[flight_From,flight_Return]
 
-    params = {'request': {'slice': flightInfo, 'passengers': {'adultCount': 1}, 'solutions': 3, 'refundable': False}}
+    params = {'request': {'slice': flightInfo, 'passengers': {'adultCount': adultCount,'childCount':childrenCount}, 'solutions': 3, 'refundable': False}}
     print(params)
-    request = requests.post(url, data=json.dumps(params), headers=headers)
-    data = json.loads(request.text)
-    # print(data)
-    options = data['trips']['tripOption']
+    try:
+        request = requests.post(url, data=json.dumps(params), headers=headers)
+        data = json.loads(request.text)
+    except:
+        result = {"Error": "No result found from flight"}
+        return result
+    try:
+        print("data {}".format(data))
+        options = data['trips']['tripOption']
 
-    airportName = {}
-    airports = data['trips']['data']['airport']
-    for airport in airports:
-        airportName[airport['code']] = airport['name']
+        airportName = {}
+        airports = data['trips']['data']['airport']
+        for airport in airports:
+            airportName[airport['code']] = airport['name']
 
-    flightList = []
-    count=1
-    for option in options:
-        flight_package={}
-        price = {'Currency': option['saleTotal'][:3], 'Price': option['saleTotal'][3:]}
-        flight = {}
-        flight['price']=price
-        flight['id']=count
-        slices = option['slice']
-        twoWay=[]
-        for slice in slices:
-            oneWay_package={}
-            segments = slice['segment']
-            duration=slice['duration']
-            oneWay_package['duration']=duration
-            oneWay = []
-            for segment in segments:
-                detail={}
-                flight_Number=segment['flight']['number']
-                legs = segment['leg']
-                for leg in legs:
+        flightList = []
+        count=1
+        for option in options:
+            flight_package={}
+            price = {'Currency': option['saleTotal'][:3], 'Price': option['saleTotal'][3:]}
+            flight = {}
+            flight['price']=price
+            flight['id']=count
+            slices = option['slice']
+            twoWay=[]
+            for slice in slices:
+                oneWay_package={}
+                segments = slice['segment']
+                duration=slice['duration']
+                oneWay_package['duration']=duration
+                oneWay = []
+                for segment in segments:
+                    detail={}
+                    flight_Number=segment['flight']['number']
+                    legs = segment['leg']
+                    for leg in legs:
 
-                    detail['departureTime']=leg['departureTime']
-                    detail['arrivalTime'] = leg['arrivalTime']
-                    detail['origin']=airportName[leg['origin']]
-                    detail['destination'] = airportName[leg['destination']]
-                oneWay.append(detail)
-            oneWay_package['info']=oneWay
-            twoWay.append(oneWay_package)
-        flight['flight_info']=twoWay
+                        detail['departureTime']=leg['departureTime']
+                        detail['arrivalTime'] = leg['arrivalTime']
+                        detail['origin']=airportName[leg['origin']]
+                        detail['destination'] = airportName[leg['destination']]
+                    oneWay.append(detail)
+                oneWay_package['info']=oneWay
+                twoWay.append(oneWay_package)
+            flight['flight_info']=twoWay
 
-        flight_package['flight']=flight
-        count=count+1
-        flightList.append(flight_package)
+            flight_package['flight']=flight
+            count=count+1
+            flightList.append(flight_package)
 
-    return flightList
+        return flightList
+    except:
+        result = {"Error":"Error Parsing the result"}
+        return result
 
 
 # def getTradeOff(flightList):

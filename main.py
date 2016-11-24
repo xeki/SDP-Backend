@@ -9,6 +9,7 @@ from hotel import *
 from trade_off import *
 from package import *
 from combine import *
+from datetime import datetime
 
 app = Flask(__name__)
 @app.errorhandler(404)
@@ -33,15 +34,23 @@ def package():
     try:
         originplace= request.args.get('originplace')
         destinationplace = request.args.get('destinationplace')
-        outbounddate= request.args.get('outbounddate')#mm/dd/yyyy format
-        inbounddate = request.args.get('inbounddate')#mm/dd/yyyy format
+        outbounddate= request.args.get('outbounddate')#yyyy/mm/dd format
+        inbounddate = request.args.get('inbounddate')#yyyy/mm/dd format
+        date_format = "%Y-%m-%d"
+        a = datetime.strptime(outbounddate, date_format)
+        b = datetime.strptime(inbounddate, date_format)
+        delta = b - a
+        interval=delta.days
+        print(interval)
         attractionStr=request.args.get('attractions')
         tfDuration=request.args.get('tfd')
         tfPrice = request.args.get('tfp')
         tfTransfer = request.args.get('tft')
         thRanking = request.args.get('thr')
         thPrice = request.args.get('thp')
-
+        adult=int(request.args.get('adult'))
+        children = int(request.args.get('children'))
+        budget=float(request.args.get('budget'))
         originplace = cityEncoder(originplace)
         destinationplace = cityEncoder(destinationplace)
     except:
@@ -51,7 +60,9 @@ def package():
     print(destinationplace)
     print(outbounddate)
     print(inbounddate)
-
+    print(adult)
+    print(children)
+    print(budget)
     try:
         attractionList=attractionStr.split(',')
         attraction=getAttractions(destinationplace,attractionList)
@@ -59,7 +70,7 @@ def package():
         av = attraction.copy()
         av.update(vaccination)
 
-        data_f=getFlightData(originplace, destinationplace, outbounddate, inbounddate)
+        data_f=getFlightData(originplace, destinationplace, outbounddate, inbounddate,adult,children)
         # data_f = getFlightData('Helsinki', 'Paris', '2016-11-08', '2016-11-9')
         data_h = getHotelsForDestinationCity(destinationplace, outbounddate, inbounddate)
 
@@ -67,7 +78,7 @@ def package():
         dic = trade_off(options,tfPrice,tfDuration,tfTransfer,thPrice,thRanking)
         print(dic)
         front = analysis(dic)
-        results=packages(options,front,data_f,data_h,av)
+        results=packages(options,front,data_f,data_h,av,budget,adult,children,interval)
         print(results)
         response={'results':results}
 

@@ -37,29 +37,32 @@ def getHotelsForDestinationCity(city, check_in, check_out):
     API_KEY = "3644ac54270d20d577ae19a86c698d1f"
     mycity = city
     LIMIT = 3
+    destIdList = []
+    destId = ""
     if mycity == "":
         return {"Error": "City can not be empty"}
     validCity = ManageCity(mycity)
     if not validCity:
         return {"Error": "Invalid city name"}
     # making API call to trip expert to list destinations
-    url = hotelUrl + API_KEY
-    #data = urlopen(url).read().decode('utf-8')
-    data = requests.get(url)
-    jsonData = json.loads(data.text)
-    jsonData = jsonData['response']['destinations']
-    destIdList = []
-    destId = ""
-    # checking if our city is in the list of destinations
-    for destDict in jsonData:
-        if destDict["name"] == mycity:
-            destId = destDict["id"]
-            break
-        else:
-            destIdList.append(destDict["id"])
-    # if our city is not in the trip-expert destinations list we'll pick a random destination
-    if destId == "":
-        destId = random.choice(destIdList)
+    try:
+        url = hotelUrl + API_KEY
+        #data = urlopen(url).read().decode('utf-8')
+        data = requests.get(url)
+        jsonData = json.loads(data.text)
+        jsonData = jsonData['response']['destinations']
+         # checking if our city is in the list of destinations
+        for destDict in jsonData:
+            if destDict["name"] == mycity:
+                destId = destDict["id"]
+                break
+            else:
+                destIdList.append(destDict["id"])
+        # if our city is not in the trip-expert destinations list we'll pick a random destination
+        if destId == "":
+            destId = random.choice(destIdList)
+    except:
+        return {"Error":"Coundn't retrive destination cities from hotel Expert API"}
 
     try:
         # DATE PARSING
@@ -86,7 +89,11 @@ def getHotelsForDestinationCity(city, check_in, check_out):
             hotelName = venue['name']
             pricePerDay = venue['low_rate']
             ranking = venue['tripexpert_score']
-            price = random.randint(100, 350)
+            p = random.random()
+            if p <= 0.8:
+                price = random.randint(50, 200)
+            else:
+                price = random.randint(200,350)
             venueList.append({"id": id, "name": hotelName, "latitude": hotelGeoLat, "longitude": hotelGeoLong,
                               "low_rate": pricePerDay, "ranking": ranking, "room_price": price})
             id += 1

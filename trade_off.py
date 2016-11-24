@@ -53,16 +53,23 @@ def trade_off(options,tfPrice,tfDuration,tfTransfer,thPrice,thRanking):
     return dic
 
 def analysis(problem_data):
-    tradeoff_analytics = TradeoffAnalyticsV1(
-        username='4972bbad-c6dd-4e35-a7a8-2128caf813a9',
-        password='sCl8MMeZJOM2')
-    data=json.dumps(tradeoff_analytics.dilemmas(problem_data), indent=2)
-    print(data)
-    data = json.loads(data)
-    results=data['resolution']['solutions']
-    front=[]
-    for result in results:
-        if result['status']=='FRONT':
-            front.append(result['solution_ref'])
-    return front
+    data = ""
+    try:
+        tradeoff_analytics = TradeoffAnalyticsV1(
+            username='4972bbad-c6dd-4e35-a7a8-2128caf813a9',
+            password='sCl8MMeZJOM2')
+        data=json.dumps(tradeoff_analytics.dilemmas(problem_data), indent=2)
+    except:
+        return {"Error":"Problem arised from trade off request "}
+    try:
+        print(data)
+        data = json.loads(data)
+        results=data['resolution']['solutions']
+        front=[]
+        for result in results:
+            if result['status']=='FRONT':
+                front.append(result['solution_ref'])
+        return front
+    except:
+        return {"Error":"Error in parsing tradeoff result"}
 
