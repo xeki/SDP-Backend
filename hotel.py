@@ -39,6 +39,7 @@ def getHotelsForDestinationCity(city, check_in, check_out):
     LIMIT = 3
     destIdList = []
     destId = ""
+    isHotelReal = False
     if mycity == "":
         return {"Error": "City can not be empty"}
     validCity = ManageCity(mycity)
@@ -51,10 +52,11 @@ def getHotelsForDestinationCity(city, check_in, check_out):
         data = requests.get(url)
         jsonData = json.loads(data.text)
         jsonData = jsonData['response']['destinations']
-         # checking if our city is in the list of destinations
+        # checking if our city is in the list of destinations
         for destDict in jsonData:
-            if destDict["name"] == mycity:
+            if destDict["name"].lower() == mycity.lower():
                 destId = destDict["id"]
+                isHotelReal = True
                 break
             else:
                 destIdList.append(destDict["id"])
@@ -95,7 +97,7 @@ def getHotelsForDestinationCity(city, check_in, check_out):
             else:
                 price = random.randint(200,350)
             venueList.append({"id": id, "name": hotelName, "latitude": hotelGeoLat, "longitude": hotelGeoLong,
-                              "low_rate": pricePerDay, "ranking": ranking, "room_price": price})
+                              "low_rate": pricePerDay, "ranking": ranking, "room_price": price,"isHotelReal":isHotelReal})
             id += 1
 
         return venueList
