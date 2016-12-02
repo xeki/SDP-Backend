@@ -30,7 +30,10 @@ def getFlightData(origin, destination, dateOfDeparture, dateOfreturn,adultCount,
     try:
         print("data {}".format(data))
         options = data['trips']['tripOption']
-
+        carriersDict = {}
+        carriers = data['trips']['data']['carrier']
+        for carrier in carriers:
+            carriersDict[carrier['code']] = carrier['name']
         airportName = {}
         airports = data['trips']['data']['airport']
         for airport in airports:
@@ -55,6 +58,7 @@ def getFlightData(origin, destination, dateOfDeparture, dateOfreturn,adultCount,
                 for segment in segments:
                     detail={}
                     flight_Number=segment['flight']['number']
+                    carrierName = carriersDict[segment['flight']['carrier']]
                     legs = segment['leg']
                     for leg in legs:
 
@@ -62,6 +66,8 @@ def getFlightData(origin, destination, dateOfDeparture, dateOfreturn,adultCount,
                         detail['arrivalTime'] = leg['arrivalTime']
                         detail['origin']=airportName[leg['origin']]
                         detail['destination'] = airportName[leg['destination']]
+                        detail['carrier'] = carrierName
+                        detail['flightNumber'] = flight_Number
                     oneWay.append(detail)
                 oneWay_package['info']=oneWay
                 twoWay.append(oneWay_package)
