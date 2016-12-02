@@ -14,17 +14,30 @@ from datetime import datetime
 app = Flask(__name__)
 @app.errorhandler(404)
 def custom404(error):
+	'''
 	response = flask.jsonify({'message':error.description})
 	response.status_code = 404
 	response.status = 'error:Resource not found'
-	return response
+	return response'''
+	response = {}
+	response['error'] = True
+	response['message'] =error.description
+	response['status_code'] = 404
+	response['status'] = 'error:Resource not found'
+	return flask.jsonify(response)
 @app.errorhandler(400)
 def custom400(error):
+	'''
 	response = flask.jsonify({'message':error.description})
 	response.status_code = 400
 	response.status = 'error:Bad Request'
-	return response
-
+	return response'''
+	response = {}
+	response['error'] = True
+	response['message'] =error.description
+	response['status_code'] = 400
+	response['status'] = 'error:Resource not found'
+	return flask.jsonify(response)
 @app.route('/')
 def greetThem():
     return "Hi guys"
@@ -56,13 +69,13 @@ def package():
     except:
         flask.abort(400, "Invalid arguments in the parameter")
 
-    print(originplace)
-    print(destinationplace)
-    print(outbounddate)
-    print(inbounddate)
-    print(adult)
-    print(children)
-    print(budget)
+    print("Origin:{} ".format(originplace))
+    print("Destination {} ".format(destinationplace))
+    print("Outbound date: {} ".format(outbounddate))
+    print("Inbound date: {} ".format(inbounddate))
+    print("Adult: {} ".format(adult))
+    print("Children {} ".format(children))
+    print("Budget {} ".format(budget))
     try:
         attractionList=attractionStr.split(',')
         attraction=getAttractions(destinationplace,attractionList)

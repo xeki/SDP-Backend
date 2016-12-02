@@ -11,6 +11,7 @@ def getAttractions(city, attractions):
     myCity = city
     queryStr = ""
     if myCity == "" or len(attractionList) == 0:
+        print("Error: Incomplet argument parameters")					
         return {"Error": "Incomplet argument parameters"}
     try:
         # building multiple attraction names with connective word 'OR'
@@ -21,6 +22,7 @@ def getAttractions(city, attractions):
         # attractions only for a single city
         queryStr += " in " + myCity
     except:
+        print("Error: Invalid arguments in the parameter")					
         return {"Error": "Invalid arguments in the parameter"}
 
     url = url + queryStr + "&key=" + API_KEY

@@ -18,17 +18,15 @@ def packages(options,front,data_f,data_h,av,budget,adult,children,interval):
             # print(str(result_list[b]))
             # print(option['name'])
             if str(option['name'])==str(result_list[b]):
-                print('yes')
                 priceF=option['values']['flight_price']
                 priceH=option['values']['room_price']
                 num=int((adult+children)/2)+1
                 total=float(priceF+priceH*num*interval)
                 total_list.append(total)
-                print(total)
-                print(budget)
+                print("Total {}".format(total))
+                print("Budget {}".format(budget))
                 if total<=budget:
-                    print('add')
-                    print(result_list[b])
+                    print("Result -list: {}".format(result_list[b]))
                     budgetlist.append(result_list[b])
 
     print("budget list:{} and length {} ".format(budgetlist,len(budgetlist)))
@@ -43,7 +41,7 @@ def packages(options,front,data_f,data_h,av,budget,adult,children,interval):
         print("min budget:{} ".format(results))
         return  results
     else:
-        print("budget list is not zero")
+        print("budget list is not zero\n")
     for k in range(len(budgetlist)):
         a=budgetlist[k].split(',')
         flight=int(a[0][-1:])

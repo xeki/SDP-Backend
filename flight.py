@@ -15,8 +15,15 @@ def getFlightData(origin, destination, dateOfDeparture, dateOfreturn,adultCount,
     api_key = "AIzaSyCFe4aroUT5mXbLx450-AvAQYC5GLPBwYk"
     url = "https://www.googleapis.com/qpxExpress/v1/trips/search?key=" + api_key
     headers = {'content-type': 'application/json'}
-    flight_From = {'origin': city(origin), 'destination': city(destination), 'date': dateOfDeparture}
-    flight_Return={'origin': city(destination), 'destination': city(origin), 'date': dateOfreturn}
+    destCity = city(destination)
+    originCity = 	city(origin)
+    if destCity==None or originCity == None:
+        result = {"Error": "City not found in IATA city list"}													
+        print("Desination-City {} Origin-City {}\nError {}".format(destCity,originCity,result))
+        return None
+								
+    flight_From = {'origin': originCity, 'destination': destCity, 'date': dateOfDeparture}
+    flight_Return={'origin': destCity, 'destination': originCity, 'date': dateOfreturn}
     flightInfo=[flight_From,flight_Return]
 
     params = {'request': {'slice': flightInfo, 'passengers': {'adultCount': adultCount,'childCount':childrenCount}, 'solutions': 3, 'refundable': False}}
@@ -26,9 +33,10 @@ def getFlightData(origin, destination, dateOfDeparture, dateOfreturn,adultCount,
         data = json.loads(request.text)
     except:
         result = {"Error": "No result found from flight"}
+        print(result)								
         return result
     try:
-        print("data {}".format(data))
+        #print("data {}".format(data))
         options = data['trips']['tripOption']
         carriersDict = {}
         carriers = data['trips']['data']['carrier']
@@ -80,6 +88,7 @@ def getFlightData(origin, destination, dateOfDeparture, dateOfreturn,adultCount,
         return flightList
     except:
         result = {"Error":"Error Parsing the result"}
+        print(result)								
         return result
 
 

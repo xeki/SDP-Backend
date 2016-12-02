@@ -41,9 +41,11 @@ def getHotelsForDestinationCity(city, check_in, check_out):
     destId = ""
     isHotelReal = False
     if mycity == "":
+        print("Error: City can not be empty")					
         return {"Error": "City can not be empty"}
     validCity = ManageCity(mycity)
     if not validCity:
+        print("Error: Invalid city name")					
         return {"Error": "Invalid city name"}
     # making API call to trip expert to list destinations
     try:
@@ -64,6 +66,7 @@ def getHotelsForDestinationCity(city, check_in, check_out):
         if destId == "":
             destId = random.choice(destIdList)
     except:
+        print("Error: Coundn't retrive destination cities from hotel Expert API")					
         return {"Error":"Coundn't retrive destination cities from hotel Expert API"}
 
     try:
@@ -79,7 +82,7 @@ def getHotelsForDestinationCity(city, check_in, check_out):
 
         url = 'http://api.tripexpert.com/v1/venues?destination_id=' + str(destId) + '&limit=' + str(
             LIMIT) + '&check_in=' + checkInDate + '&check_out=' + checkOutDate + '&api_key=' + API_KEY
-        print("Url: {}".format(url))
+        print("Hotel Url: {}".format(url))
         response = requests.get(url)
         response = json.loads(response.text)
         totalVenues = response['response']['venues']
@@ -102,6 +105,7 @@ def getHotelsForDestinationCity(city, check_in, check_out):
 
         return venueList
     except:
+        print("Error : Error in searching hotel details")					
         return {"Error": "Error in searching hotel details"}
 
 '''
