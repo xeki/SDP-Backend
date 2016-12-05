@@ -1,7 +1,6 @@
 import flask
-import requests
 from flask import Flask, flash, redirect, render_template, request, session, abort
-import json
+from flask_cors import CORS, cross_origin
 from Vaccination import *
 from Attraction import *
 from flight import *
@@ -12,6 +11,8 @@ from combine import *
 from datetime import datetime
 
 app = Flask(__name__)
+CORS(app)
+
 @app.errorhandler(404)
 def custom404(error):
 	'''
@@ -23,7 +24,7 @@ def custom404(error):
 	response['error'] = True
 	response['message'] =error.description
 	response['status_code'] = 404
-	response['status'] = 'error:Resource not found'
+	response['status'] = 'error:Resource not found, please see the log file'
 	return flask.jsonify(response)
 @app.errorhandler(400)
 def custom400(error):
@@ -36,7 +37,7 @@ def custom400(error):
 	response['error'] = True
 	response['message'] =error.description
 	response['status_code'] = 400
-	response['status'] = 'error:Resource not found'
+	response['status'] = 'error:Bad request, please see the log file'
 	return flask.jsonify(response)
 @app.route('/')
 def greetThem():
