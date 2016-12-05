@@ -1,6 +1,6 @@
 import flask
 from flask import Flask, flash, redirect, render_template, request, session, abort
-from flask_cors import CORS, cross_origin
+#from flask_cors import CORS, cross_origin
 from Vaccination import *
 from Attraction import *
 from flight import *
@@ -8,10 +8,11 @@ from hotel import *
 from trade_off import *
 from package import *
 from combine import *
+#from cors_flask import *
 from datetime import datetime
 
 app = Flask(__name__)
-CORS(app)
+#CORS(app)
 
 @app.errorhandler(404)
 def custom404(error):
@@ -40,10 +41,12 @@ def custom400(error):
 	response['status'] = 'error:Bad request, please see the log file'
 	return flask.jsonify(response)
 @app.route('/')
+@crossdomain(origin='*')
 def greetThem():
     return "Hi guys"
 
 @app.route('/sdp',methods=['GET'])
+@crossdomain(origin='*')
 def package():
     try:
         originplace= request.args.get('originplace')
