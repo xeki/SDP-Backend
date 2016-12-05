@@ -8,7 +8,7 @@ from hotel import *
 from trade_off import *
 from package import *
 from combine import *
-#from cors_flask import *
+from cors_flask import *
 from datetime import datetime
 
 app = Flask(__name__)
