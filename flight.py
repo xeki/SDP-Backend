@@ -11,7 +11,7 @@ from city_code import *
 #         if (result['name'] == city):
 #             return result['code']
 
-def getFlightData(origin, destination, dateOfDeparture, dateOfreturn,adultCount,childrenCount):
+def getFlightData(origin, destination, dateOfDeparture, dateOfreturn,adultCount=1,childrenCount=0):
     api_key = "AIzaSyCFe4aroUT5mXbLx450-AvAQYC5GLPBwYk"
     url = "https://www.googleapis.com/qpxExpress/v1/trips/search?key=" + api_key
     headers = {'content-type': 'application/json'}
@@ -51,7 +51,7 @@ def getFlightData(origin, destination, dateOfDeparture, dateOfreturn,adultCount,
         count=1
         for option in options:
             flight_package={}
-            price = {'Currency': option['saleTotal'][:3], 'Price': option['saleTotal'][3:]}
+            price = {'Currency': option['saleTotal'][:3], 'Price': float(option['saleTotal'][3:])}
             flight = {}
             flight['price']=price
             flight['id']=count

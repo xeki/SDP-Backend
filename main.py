@@ -58,15 +58,27 @@ def package():
         b = datetime.strptime(inbounddate, date_format)
         delta = b - a
         interval=delta.days
-        print(interval)
+        print("duration interval: {}".format(interval))
         attractionStr=request.args.get('attractions')
+        if attractionStr == None or attractionStr == "":
+            attractionStr = 'shop'
+        print("attractionStr: {}".format(attractionStr))
         tfDuration=request.args.get('tfd')
         tfPrice = request.args.get('tfp')
         tfTransfer = request.args.get('tft')
         thRanking = request.args.get('thr')
         thPrice = request.args.get('thp')
-        adult=int(request.args.get('adult'))
-        children = int(request.args.get('children'))
+        adultStr = request.args.get('adult')
+        if adultStr == None or adultStr =="":
+            adult = 1
+        else:
+            adult=int(request.args.get('adult'))
+        childrenStr = request.args.get('children')
+        if childrenStr == None or childrenStr=="":
+            children = 0
+        else:
+            children = int(request.args.get('children'))
+        print("Adult Count: {}".format(adultStr))
         budget=float(request.args.get('budget'))
         originplace = cityEncoder(originplace)
         destinationplace = cityEncoder(destinationplace)
