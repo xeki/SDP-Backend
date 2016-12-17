@@ -66,8 +66,8 @@ def getHotelsForDestinationCity(city, check_in, check_out):
         if destId == "":
             destId = random.choice(destIdList)
     except:
-        print("Error: Coundn't retrive destination cities from hotel Expert API")					
-        return {"Error":"Coundn't retrive destination cities from hotel Expert API"}
+        print("Error: Couldn't retrieve destination cities from hotel Expert API")					
+        return {"Error":"Couldn't retrieve destination cities from hotel Expert API"}
 
     try:
         # DATE PARSING

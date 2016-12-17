@@ -22,7 +22,9 @@ def getVaccination(city):
 			shortName = results[i].get("short_name")
 			# print("Long Name: {} Short Name: {}".format(longName,shortName))
 	except:
-		return {"Error":"Invalid city name"}
+		#return {"Error":"Invalid city name"}
+		#dic = {'Vaccinations':'Vaccination data not available'}
+		return {}
 
 	try:
 		vaccineUrl = vaccineUrl + shortName
