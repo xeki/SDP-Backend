@@ -37,7 +37,8 @@ def getVaccination(city):
 		return dic
 
 	except:
-		return {"Error":"Vaccination data can not be retrieved"}
+		#return {"Error":"Vaccination data can not be retrieved"}
+		return {}
 
 
 
