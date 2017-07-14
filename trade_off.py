@@ -50,7 +50,7 @@ def analysis(problem_data):
             password='sCl8MMeZJOM2')
         data=json.dumps(tradeoff_analytics.dilemmas(problem_data), indent=2)
     except:
-        return {"Error":"Problem arisen from trade off request "}
+        return {"Error":"Problem occured from trade off request "}
     try:
         print(data)
         data = json.loads(data)
