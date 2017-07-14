@@ -2,17 +2,7 @@ import json
 import os
 from os.path import join, dirname
 from watson_developer_cloud import TradeoffAnalyticsV1
-def trade_off(options,tfPrice,tfDuration,tfTransfer,thPrice,thRanking):
-    if tfPrice is None:
-        tfPrice='min'
-    if tfDuration is None:
-        tfDuration='min'
-    if tfTransfer is None:
-        tfTransfer='min'
-    if thPrice is None:
-        thPrice='min'
-    if thRanking is None:
-        thRanking='max'
+def trade_off(options,tfPrice="min",tfDuration="min",tfTransfer="min",thPrice="min",thRanking="max"):
     dic = {
         "columns": [
             {
@@ -60,7 +50,7 @@ def analysis(problem_data):
             password='sCl8MMeZJOM2')
         data=json.dumps(tradeoff_analytics.dilemmas(problem_data), indent=2)
     except:
-        return {"Error":"Problem arised from trade off request "}
+        return {"Error":"Problem arisen from trade off request "}
     try:
         print(data)
         data = json.loads(data)
@@ -71,5 +61,5 @@ def analysis(problem_data):
                 front.append(result['solution_ref'])
         return front
     except:
-        return {"Error":"Error in parsing tradeoff result"}
+        return {"Error":"Error in parsing trade off result"}
 
